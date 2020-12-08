@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import styles from "./Card.module.css";
 import { Link } from "react-router-dom";
+import { formatPrice } from "../../utils";
 import { DataContext } from "../../context/DataProvider";
 
 export default function Card() {
+  // DataContext sẽ chứa các global data
   const value = useContext(DataContext);
   const [products] = value.products;
   const addCart = value.addCart;
@@ -20,7 +22,7 @@ export default function Card() {
               <Link to={`/products/${product._id}`}>{product.title}</Link>
             </h3>
             <p>{product.description}</p>
-            <h4>${product.price}</h4>
+            <h4>{formatPrice(product.price)}</h4>
             <button onClick={() => addCart(product._id)}>Mua hàng</button>
           </div>
         </div>
